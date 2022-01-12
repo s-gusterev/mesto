@@ -47,6 +47,7 @@
     display: flex;
     align-items: center;
     color: #fff;
+    margin-bottom: 47px;
 }
 
 .profile__img {
@@ -136,4 +137,73 @@
     height: 22px;
     background-image: url(../images/icon-add.svg);
     background-size: cover;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+    justify-content: space-between;
+    gap: 20px 17px;
+    padding-left: 0;
+    margin: 0;
+}
+
+.card {
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card__text {
+    background-color: #fff;
+    padding: 25px 20px 31px 21px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card__title {
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.2;
+    color: #000;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0;
+    max-width: 216px;
+}
+
+.card__like {
+    display: block;
+    width: 22px;
+    height: 19px;
+    background-size: cover;
+    cursor: pointer;
+}
+
+.card__like:hover {
+    background-image: url(../images/like-hover.svg);
+}
+
+.card__like_disabled {
+    background-image: url(../images/like-disabled.svg);
+}
+.card__like_active {
+    background-image: url(../images/like-active.svg);
+}
+.card__like_active:hover {
+    background-image: url(../images/like-active.svg);
+}
+
+
+.card__img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.main__profile{
+    margin-bottom: 67px;
 }
