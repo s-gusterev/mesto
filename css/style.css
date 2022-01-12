@@ -1,4 +1,7 @@
+@import url(./fonts/fonts.css);
+
 .root {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
     background-color: #000;
 }
 
@@ -8,6 +11,10 @@
     margin: 0 auto;
     padding: 0 19px;
     box-sizing: border-box;
+}
+
+.root__header {
+    margin-bottom: 36px;
 }
 
 .header {
@@ -34,4 +41,99 @@
     display: block;
     width: 142px;
     height: 33px;
+}
+
+.profile__info {
+    display: flex;
+    align-items: center;
+    color: #fff;
+}
+
+.profile__img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 26px;
+}
+
+.profile__name {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    row-gap: 16px;
+    column-gap: 18px;
+    align-items: center;
+}
+
+.profile__title {
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 1.15;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.profile__subtitle {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.2;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.profile__btn-edit-profile {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    display: grid;
+    position: relative;
+    place-items: center;
+    grid-row: 1/-1;
+    grid-column: 2/-1;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.profile__btn-edit-profile:hover {
+    opacity: .6;
+}
+
+
+.profile__btn-edit-profile::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-image: url(../images/icon-edit.svg);
+    background-size: cover;
+}
+
+.profile__btn-add-place {
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    box-sizing: border-box;
+    display: grid;
+    position: relative;
+    place-items: center;
+    padding: 23px 73px;
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.profile__btn-add-place:hover {
+    opacity: .6;
+}
+
+
+.profile__btn-add-place::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background-image: url(../images/icon-add.svg);
+    background-size: cover;
 }
