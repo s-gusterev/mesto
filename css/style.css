@@ -43,6 +43,11 @@
     display: block;
     width: 142px;
     height: 33px;
+    transition: opacity 250ms ease;
+}
+
+.logo:hover {
+    opacity: .6;
 }
 
 .profile__info {
@@ -102,6 +107,7 @@
     grid-column: 2/-1;
     /* margin-top: 6px; */
     cursor: pointer;
+    transition: opacity 250ms ease;
 }
 
 .profile__btn-edit-profile:hover {
@@ -130,6 +136,7 @@
     padding: 23px 73px;
     margin-left: auto;
     cursor: pointer;
+    transition: opacity 250ms ease;
 }
 
 .profile__btn-add-place:hover {
@@ -189,6 +196,7 @@
     height: 19px;
     background-size: cover;
     cursor: pointer;
+    transition: background-image 250ms ease;
 }
 
 .card__like:hover {
@@ -222,7 +230,7 @@
 }
 
 @media screen and (max-width:917px) {
-    .card__title{
+    .card__title {
         max-width: clamp(216px, 34vw, 320px);
     }
 }
@@ -234,7 +242,7 @@
         margin-right: -19px;
     }
 
-    .header__logo{
+    .header__logo {
         margin-left: 27px;
     }
 
@@ -242,6 +250,7 @@
         flex-wrap: wrap;
         row-gap: 36px;
         justify-content: center;
+        margin-bottom: 36px;
     }
 
     .profile__name {
@@ -251,8 +260,18 @@
     .profile__btn-add-place {
         width: 100%;
     }
+
+    .profile__btn-add-place::before {
+        width: 16px;
+        height: 16px;
+    }
+
     .profile__btn-edit-profile {
         margin: 0;
+    }
+
+    .footer__copyright {
+        margin: 48px 0 36px;
     }
 
     /* .header::after {
@@ -304,7 +323,7 @@
         justify-content: center;
     }
 
-    .profile__subtitle{
+    .profile__subtitle {
         grid-column: 1/-1;
     }
 }
