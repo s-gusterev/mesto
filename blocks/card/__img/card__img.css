@@ -1,4 +1,26 @@
 .card__img {
-  aspect-ratio: 1;
+  display: block;
+  height: 282px;
   object-fit: cover;
 }
+
+@media screen and (max-width: 917px) {
+  .card__img {
+    height: clamp(282px, 46.9vw, 431px);
+  }
+
+}
+
+@media screen and (max-width: 618px) {
+  .card__img {
+    height: clamp(282px, 93.85113268608414vw, 580px);
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .card__img {
+    height: 282px;
+  }
+}
+
+
