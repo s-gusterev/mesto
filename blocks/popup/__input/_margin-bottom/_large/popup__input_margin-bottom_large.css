@@ -1,0 +1,9 @@
+.popup__input_margin-bottom_large {
+  margin-bottom: 49px;
+}
+
+@media screen and (max-width:560px) {
+  .popup__input_margin-bottom_large {
+    margin-bottom: 46px;
+  }
+}
