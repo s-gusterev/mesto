@@ -31,11 +31,6 @@
 @media screen and (max-width:768px) {
   .profile__btn-edit-profile {
     margin: 0;
-  }
-}
-
-@media screen and (max-width:415px) {
-  .profile__btn-edit-profile {
     grid-column: 3/3;
   }
 }

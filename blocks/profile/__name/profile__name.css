@@ -17,14 +17,10 @@
   .profile__name {
     text-align: center;
     margin-bottom: 36px;
-  }
-}
-
-@media screen and (max-width:415px) {
-  .profile__name {
     grid-template-columns: 18px max-content 18px;
     width: 100%;
     justify-items: center;
     justify-content: center;
+
   }
 }
