@@ -23,7 +23,6 @@
   position: absolute;
   width: clamp(7.5px, 1.089324618736383vw, 10px);
   height: clamp(7.5px, 1.089324618736383vw, 10px);
-  aspect-ratio: 1;
   background-image: url(../../../images/icon-edit.svg);
   background-size: cover;
 }
