@@ -73,6 +73,7 @@
 @media screen and (max-width:415px) {
   .profile__title {
     max-width: 300px;
+    grid-column: 2/2;
   }
 }
 
