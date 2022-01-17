@@ -9,6 +9,11 @@
   width: 32px;
   height: 32px;
   cursor: pointer;
+  transition: opacity 250ms ease;
+}
+
+.popup__close:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width:560px) {
