@@ -17,10 +17,12 @@ const popupClose = document.querySelectorAll('.popup__close');
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
 const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
-const cardLike = cardBody.querySelector('.card__like');
+// const delCard = cardTemplate.querySelector('.card__del');
+// console.log(delCard)
+// const cardLike = cardBody.querySelector('.card__like');
 // const titleCard = cardBody.querySelector('.card__title');
 // const imgCard = cardBody.querySelector('.card__img')
-console.log(cardLike);
+// console.log(cardLike);
 
 const initialCards = [{
     name: 'Москва',
@@ -101,6 +103,7 @@ function formAddCardSubmit(evt) {
   const titleCard = cardBody.querySelector('.card__title');
   const imgCard = cardBody.querySelector('.card__img');
   const cardLike = cardBody.querySelector('.card__like');
+  const delCard = cardBody.querySelector('.card__del');
   titleCard.textContent = inputCardTitle.value;
   imgCard.setAttribute('src', `${inputCardImage.value}`);
   imgCard.setAttribute('alt', `Изображение - ${inputCardTitle.value}`);
@@ -109,9 +112,21 @@ function formAddCardSubmit(evt) {
     likeTarget.classList.toggle('card__like_active');
     likeTarget.classList.toggle('card__like_disabled');
   })
+
+delCard.addEventListener('click', function () {
+  console.log(delCard)
+  cardBody.remove();
+})
+
   cards.prepend(cardBody);
   deletePopup();
   //popup.classList.remove('popup_opened');
+}
+
+function delCard() {
+  const cardBody = cardTemplate.querySelector('.card');
+
+
 }
 
 
@@ -137,6 +152,9 @@ initialCards.forEach(function (card) {
   const titleCard = cardBody.querySelector('.card__title');
   const imgCard = cardBody.querySelector('.card__img');
   const cardLike = cardBody.querySelector('.card__like');
+
+const delCard = cardBody.querySelector('.card__del');
+
   titleCard.textContent = card.name;
   imgCard.setAttribute('src', `${card.link}`);
   imgCard.setAttribute('alt', `Изображение - ${titleCard.textContent}`);
@@ -146,6 +164,12 @@ initialCards.forEach(function (card) {
     likeTarget.classList.toggle('card__like_active');
     likeTarget.classList.toggle('card__like_disabled');
   })
+
+  delCard.addEventListener('click', function () {
+    console.log(delCard)
+    cardBody.remove();
+  })
+
   cards.append(cardBody);
 })
 
