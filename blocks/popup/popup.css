@@ -1,9 +1,13 @@
 .popup {
   width: 100vw;
   height: 100vh;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
+  /* visibility:hidden; */
+  opacity: 0;
+  transition: all 350ms linear;
+  z-index: -1;
 }
 
 .popup::before {
@@ -15,5 +19,10 @@
   height: 100%;
   background-color: #000;
   opacity: .5;
+  transition: opacity 350ms ease;
   z-index: -1;
+}
+
+.popup_background_dark::before {
+  opacity: .9;
 }
