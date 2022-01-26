@@ -16,10 +16,11 @@ const profileJob = document.querySelector('.profile__subtitle');
 const popupClose = document.querySelectorAll('.popup__close');
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
-// const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
+const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
+const cardLike = cardBody.querySelector('.card__like');
 // const titleCard = cardBody.querySelector('.card__title');
 // const imgCard = cardBody.querySelector('.card__img')
-// console.log(cardBody);
+console.log(cardLike);
 
 const initialCards = [{
     name: 'Москва',
@@ -98,12 +99,17 @@ function formAddCardSubmit(evt) {
   evt.preventDefault();
   const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
   const titleCard = cardBody.querySelector('.card__title');
-  const imgCard = cardBody.querySelector('.card__img')
+  const imgCard = cardBody.querySelector('.card__img');
+  const cardLike = cardBody.querySelector('.card__like');
   titleCard.textContent = inputCardTitle.value;
   imgCard.setAttribute('src', `${inputCardImage.value}`);
   imgCard.setAttribute('alt', `Изображение - ${inputCardTitle.value}`);
+  cardLike.addEventListener('click', function (evt) {
+    const likeTarget = evt.target;
+    likeTarget.classList.toggle('card__like_active');
+    likeTarget.classList.toggle('card__like_disabled');
+  })
   cards.prepend(cardBody);
-
   deletePopup();
   //popup.classList.remove('popup_opened');
 }
@@ -122,14 +128,33 @@ function deletePopup() {
   })
 }
 
+
+
 // Добавление карточек по умолчанию
 
 initialCards.forEach(function (card) {
   const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
   const titleCard = cardBody.querySelector('.card__title');
-  const imgCard = cardBody.querySelector('.card__img')
+  const imgCard = cardBody.querySelector('.card__img');
+  const cardLike = cardBody.querySelector('.card__like');
   titleCard.textContent = card.name;
   imgCard.setAttribute('src', `${card.link}`);
   imgCard.setAttribute('alt', `Изображение - ${titleCard.textContent}`);
+
+  cardLike.addEventListener('click', function (evt) {
+    const likeTarget = evt.target;
+    likeTarget.classList.toggle('card__like_active');
+    likeTarget.classList.toggle('card__like_disabled');
+  })
   cards.append(cardBody);
 })
+
+
+
+
+
+
+// cardLike.addEventListener('click', function (evt) {
+//   const likeTarget = evt.target;
+//   likeTarget.classList.add('card__like_active');
+// })
