@@ -6,6 +6,38 @@ const inputJob = formElement.querySelector('#input-job');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const popupClose = popup.querySelector('.popup__close');
+const cards = document.querySelector('.cards');
+const cardTemplate = document.querySelector('#card').content;
+// const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
+// const titleCard = cardBody.querySelector('.card__title');
+// const imgCard = cardBody.querySelector('.card__img')
+// console.log(cardBody);
+
+const initialCards = [{
+    name: 'Москва',
+    link: './images/moscow.jpg'
+  },
+  {
+    name: 'Ниагарский водопад',
+    link: './images/niagara.jpg'
+  },
+  {
+    name: 'Нью-Йорк',
+    link: './images/new-york-city.jpg'
+  },
+  {
+    name: 'Осло',
+    link: './images/oslo.jpg'
+  },
+  {
+    name: 'Сан-Франциско',
+    link: './images/san-francisco.jpg'
+  },
+  {
+    name: 'Гора Эльбрус',
+    link: './images/elbrus.jpg'
+  }
+];
 
 inputName.setAttribute('value', profileName.textContent);
 inputJob.setAttribute('value', profileJob.textContent);
@@ -30,3 +62,16 @@ function formSubmitHandler(evt) {
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
+
+// Добавление карточек по умолчанию
+
+initialCards.forEach(function (card) {
+    const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
+    const titleCard = cardBody.querySelector('.card__title');
+    const imgCard = cardBody.querySelector('.card__img')
+    titleCard.textContent = card.name;
+    imgCard.setAttribute('src', `${card.link}`);
+    imgCard.setAttribute('alt', `Изображение - ${titleCard.textContent}`);
+    cards.append(cardBody);
+  }
+)
