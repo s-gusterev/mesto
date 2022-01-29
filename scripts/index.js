@@ -2,6 +2,7 @@ const popupProfile = document.querySelector('#popup-profile');
 const popupAddCard = document.querySelector('#popup-card');
 const popupFullImage = document.querySelector('#popup-img');
 const popup = document.querySelectorAll('.popup');
+const popupClose = document.querySelectorAll('.popup__close');
 const popupImage = document.querySelector('.popup__img');
 const popupImageDescription = document.querySelector('.popup__img-description');
 const btnEditProfile = document.querySelector('.profile__btn-edit-profile');
@@ -13,7 +14,6 @@ const inputCardTitle = document.querySelector('#input-place');
 const inputCardImage = document.querySelector('#input-image');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
-const popupClose = document.querySelectorAll('.popup__close');
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
 
@@ -59,7 +59,7 @@ btnAddCard.addEventListener('click', function () {
   popupAddCard.classList.add('popup_opened');
 })
 
-// Удаление класса popup_opened
+// Закрытие попапа при отправке формы
 
 function deletePopup() {
   popup.forEach(function (element) {
@@ -67,7 +67,7 @@ function deletePopup() {
   })
 }
 
-// Закрытие попапа
+// Закрытие попапа по кнопке
 
 popupClose.forEach(function (element) {
   element.addEventListener('click', function () {
@@ -108,7 +108,7 @@ function openFullImage(target, image, description) {
 
 //Функция удаления карточки
 
-function deleteCard(target, card){
+function deleteCard(target, card) {
   target.addEventListener('click', function () {
     card.remove();
   })
@@ -116,7 +116,7 @@ function deleteCard(target, card){
 
 // ---------------------Функции форм---------------------------------
 
-// Функция редактирования профайла
+// Функция формы редактирования профайла
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
@@ -132,19 +132,20 @@ function formSubmitHandler(evt) {
 function formAddCardSubmit(evt) {
   evt.preventDefault();
   const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
-  const titleCard = cardBody.querySelector('.card__title');
-  const imgCard = cardBody.querySelector('.card__img');
+  const cardTitle = cardBody.querySelector('.card__title');
+  const cardImg = cardBody.querySelector('.card__img');
   const cardLike = cardBody.querySelector('.card__like');
-  const delCard = cardBody.querySelector('.card__del');
+  const cardDel = cardBody.querySelector('.card__del');
 
-  titleCard.textContent = inputCardTitle.value;
-  imgCard.setAttribute('src', `${inputCardImage.value}`);
-  imgCard.setAttribute('alt', `Изображение - ${inputCardTitle.value}`);
+  cardTitle.textContent = inputCardTitle.value;
+  cardImg.setAttribute('src', `${inputCardImage.value}`);
+  cardImg.setAttribute('alt', `Изображение - ${inputCardTitle.value}`);
 
-  deleteCard(delCard, cardBody);
+  deleteCard(cardDel, cardBody);
   deletePopup();
   addCardLike(cardLike);
-  openFullImage(imgCard, imgCard, titleCard);
+  openFullImage(cardImg, cardImg, cardTitle);
+
   cards.prepend(cardBody);
 }
 // ------------------------------------------------------------------
@@ -153,21 +154,18 @@ function formAddCardSubmit(evt) {
 
 initialCards.forEach(function (card) {
   const cardBody = cardTemplate.querySelector('.card').cloneNode(true);
-  const titleCard = cardBody.querySelector('.card__title');
-  const imgCard = cardBody.querySelector('.card__img');
+  const cardTitle = cardBody.querySelector('.card__title');
+  const cardImg = cardBody.querySelector('.card__img');
   const cardLike = cardBody.querySelector('.card__like');
-  const delCard = cardBody.querySelector('.card__del');
+  const cardDel = cardBody.querySelector('.card__del');
 
-  titleCard.textContent = card.name;
-  imgCard.setAttribute('src', `${card.link}`);
-  imgCard.setAttribute('alt', `Изображение - ${titleCard.textContent}`);
+  cardTitle.textContent = card.name;
+  cardImg.setAttribute('src', `${card.link}`);
+  cardImg.setAttribute('alt', `Изображение - ${cardTitle.name}`);
 
-  deleteCard(delCard, cardBody);
+  deleteCard(cardDel, cardBody);
   addCardLike(cardLike);
-  openFullImage(imgCard, imgCard, titleCard);
+  openFullImage(cardImg, cardImg, cardTitle);
 
   cards.append(cardBody);
 })
-
-//Привет ревьюер. Мне очень жаль, что тебе пришлось видеть этот код.
-//Прошу меня простить.
