@@ -32,8 +32,8 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
-    <div class="popup popup_background_light root__popup" id="popup-profile">
-      <form class="popup__container popup__container_type_form" name="popup-edit-profile">
+    <div class="popup popup_background_light popup_type_profile root__popup">
+      <form class="popup__container popup__container_type_form" name="popup-edit-profile" id="form-edit-profile">
         <h2 class="popup__title">Редактировать профиль</h2>
         <input class="popup__input popup__input_margin-bottom_small" type="text" name="name" id="input-name" required
           placeholder="Имя">
@@ -43,22 +43,22 @@
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
       </form>
     </div>
-    <div class="popup popup_background_light root__popup" id="popup-card">
-      <form class="popup__container popup__container_type_form" name="popup-add-card">
+    <div class="popup popup_background_light popup_type_card-add root__popup" id="popup-card">
+      <form class="popup__container popup__container_type_form" name="popup-add-card" id="form-add-card">
         <h2 class="popup__title">Новое место</h2>
         <input class="popup__input popup__input_margin-bottom_small" type="text" name="place" id="input-place" required
           placeholder="Название">
         <input class="popup__input popup__input_margin-bottom_large" type="text" name="image" id="input-image" required
           placeholder="Ссылка на картинку">
         <button class="popup__btn" type="submit">Создать</button>
-        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <button class="popup__close popup__close_type_place" type="button" aria-label="Закрыть"></button>
       </form>
     </div>
-    <div class="popup popup_background_dark root__popup" id="popup-img">
+    <div class="popup popup_background_dark popup_type_picture root__popup" id="popup-img">
       <div class="popup__container">
-        <img src="./images/elbrus.jpg" alt="" class="popup__img">
-        <p class="popup__img-description">Карачаево-Черкессия</p>
-        <button class="popup__close" type="button" aria-label="Закрыть"></button>
+        <img src="#" alt="#" class="popup__img">
+        <p class="popup__img-description">#</p>
+        <button class="popup__close popup__close_type_image" type="button" aria-label="Закрыть"></button>
       </div>
     </div>
   </div>
@@ -67,13 +67,13 @@
     <li class="card">
       <div class="card__text">
         <h2 class="card__title"></h2>
-        <button class="card__like card__like_disabled" type="button"></button>
+        <button class="card__like" type="button"></button>
       </div>
-      <img class="card__img">
+      <img class="card__img" src="#" alt="изображение">
       <button class="card__del" type="button"></button>
     </li>
   </template>
-
+  <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>
 
