@@ -63,6 +63,7 @@ function formAddCardSubmit(evt) {
   const cardRender = templateCard(title, image);
   addCard(cardRender);
   closePopup(popupAddCard);
+  formAddCard.reset();
 }
 
 // Функция рендеринга карточек из массива
@@ -103,8 +104,6 @@ btnEditProfile.addEventListener('click', function () {
 })
 
 btnAddCard.addEventListener('click', function () {
-  inputCardTitle.value = '';
-  inputCardImage.value = '';
   openPopup(popupAddCard);
 })
 
