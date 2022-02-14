@@ -20,13 +20,34 @@ const profileJob = document.querySelector('.profile__subtitle');
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
 
+
+
+
 // Открытие попапа
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', popupCloseEsc)
 }
+
 // Закрытие попапа
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', popupCloseEsc);
+}
+
+// Закрытие попапа кликом на overlay
+function popupCloseOverlay(event, popup) {
+  if (event.target === event.currentTarget) {
+    closePopup(popup);
+  }
+}
+
+//Закрытие попапа по клавише Esc
+function popupCloseEsc(evt) {
+  if (evt.key === 'Escape') {
+    const popapOpened = document.querySelector('.popup_opened');
+    closePopup(popapOpened);
+  }
 }
 
 //Функция лайка карточки
@@ -112,3 +133,16 @@ popupClosePlace.addEventListener('click', () => closePopup(popupAddCard));
 popupCloseImage.addEventListener('click', () => closePopup(popupFullImage));
 formEditProfile.addEventListener('submit', formSubmitHandler);
 formAddCard.addEventListener('submit', formAddCardSubmit);
+
+
+popupProfile.addEventListener('click', function (evt) {
+  popupCloseOverlay(evt, popupProfile);
+});
+
+popupAddCard.addEventListener('click', function (evt) {
+  popupCloseOverlay(evt, popupAddCard);
+});
+
+popupFullImage.addEventListener('click', function (evt) {
+  popupCloseOverlay(evt, popupFullImage);
+});
