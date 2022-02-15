@@ -12,6 +12,7 @@
   padding: 0;
   cursor: pointer;
   transition: background-color 250ms ease;
+  box-sizing: border-box;
 }
 
 .popup__btn:hover {

@@ -33,24 +33,36 @@
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
     <div class="popup popup_background_light popup_type_profile root__popup">
-      <form class="popup__container popup__container_type_form" name="popup-edit-profile" id="form-edit-profile">
+      <form class="popup__container popup__container_type_form" name="popup-edit-profile" id="form-edit-profile"
+        novalidate>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input class="popup__input popup__input_margin-bottom_small" type="text" name="name" id="input-name" required
-          placeholder="Имя">
-        <input class="popup__input popup__input_margin-bottom_large" type="text" name="job" id="input-job" required
-          placeholder="Род деятельности">
-        <button class="popup__btn" type="submit">Сохранить</button>
+        <label class="popup__label" for="input-name">
+          <input class="popup__input" type="text" name="name" id="input-name" required placeholder="Имя" minlength="2"
+            maxlength="40">
+          <span class="popup__input-error input-name-error"></span></label>
+        <label class="popup__label" for="input-job">
+          <input class="popup__input" type="text" name="job" id="input-job" required placeholder="Род деятельности"
+            minlength="2" maxlength="200">
+          <span class="popup__input-error input-job-error"></span>
+        </label>
+        <button class="popup__btn root__btn" type="submit">Сохранить</button>
         <button class="popup__close popup__close_type_profile" type="button" aria-label="Закрыть"></button>
       </form>
     </div>
     <div class="popup popup_background_light popup_type_card-add root__popup" id="popup-card">
-      <form class="popup__container popup__container_type_form" name="popup-add-card" id="form-add-card">
+      <form class="popup__container popup__container_type_form" name="popup-add-card" id="form-add-card" novalidate>
         <h2 class="popup__title">Новое место</h2>
-        <input class="popup__input popup__input_margin-bottom_small" type="text" name="place" id="input-place" required
-          placeholder="Название">
-        <input class="popup__input popup__input_margin-bottom_large" type="text" name="image" id="input-image" required
-          placeholder="Ссылка на картинку">
-        <button class="popup__btn" type="submit">Создать</button>
+        <label class="popup__label" for="input-place">
+          <input class="popup__input " type="text" name="place" id="input-place" required placeholder="Название"
+            minlength="2" maxlength="30">
+          <span class="popup__input-error input-place-error"></span>
+        </label>
+        <label class="popup__label" for="input-image">
+          <input class="popup__input" type="url" name="image" id="input-image" required
+            placeholder="Ссылка на картинку">
+          <span class="popup__input-error input-image-error"></span>
+        </label>
+        <button class="popup__btn root__btn" type="submit">Создать</button>
         <button class="popup__close popup__close_type_place" type="button" aria-label="Закрыть"></button>
       </form>
     </div>
