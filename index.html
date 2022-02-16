@@ -11,10 +11,13 @@
 
 <body class="root">
   <div class="root__container">
+
     <header class="header root__header">
       <a href="./index.html" class="logo header__logo"><img src="./images/logo.svg" alt="Логотип" class="logo__img"></a>
     </header>
+
     <main class="main">
+
       <section class="profile main__profile">
         <div class="profile__info">
           <img src="./images/avatar.jpg" alt="Аватар пользователя" class="profile__img">
@@ -28,10 +31,13 @@
         <ul class="cards">
         </ul>
       </section>
+
     </main>
+
     <footer class="footer">
       <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
     </footer>
+
     <div class="popup popup_background_light popup_type_profile root__popup">
       <form class="popup__container popup__container_type_form" name="popup-edit-profile" id="form-edit-profile"
         novalidate>
@@ -39,16 +45,18 @@
         <label class="popup__label" for="input-name">
           <input class="popup__input" type="text" name="name" id="input-name" required placeholder="Имя" minlength="2"
             maxlength="40">
-          <span class="popup__input-error input-name-error"></span></label>
+          <span class="popup__input-error input-name-error"></span>
+        </label>
         <label class="popup__label" for="input-job">
           <input class="popup__input" type="text" name="job" id="input-job" required placeholder="Род деятельности"
             minlength="2" maxlength="200">
           <span class="popup__input-error input-job-error"></span>
         </label>
-        <button class="popup__btn root__btn" type="submit">Сохранить</button>
+        <button class="popup__btn popup__btn_type_profile root__btn" type="submit">Сохранить</button>
         <button class="popup__close popup__close_type_profile" type="button" aria-label="Закрыть"></button>
       </form>
     </div>
+
     <div class="popup popup_background_light popup_type_card-add root__popup" id="popup-card">
       <form class="popup__container popup__container_type_form" name="popup-add-card" id="form-add-card" novalidate>
         <h2 class="popup__title">Новое место</h2>
@@ -62,10 +70,11 @@
             placeholder="Ссылка на картинку">
           <span class="popup__input-error input-image-error"></span>
         </label>
-        <button class="popup__btn root__btn" type="submit">Создать</button>
+        <button class="popup__btn popup__btn_type_add-card root__btn" type="submit">Создать</button>
         <button class="popup__close popup__close_type_place" type="button" aria-label="Закрыть"></button>
       </form>
     </div>
+
     <div class="popup popup_background_dark popup_type_picture root__popup" id="popup-img">
       <div class="popup__container">
         <img src="#" alt="#" class="popup__img">
@@ -85,8 +94,10 @@
       <button class="card__del" type="button"></button>
     </li>
   </template>
+
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 
 </html>

@@ -9,8 +9,10 @@ const popupImage = document.querySelector('.popup__img');
 const popupImageDescription = document.querySelector('.popup__img-description');
 const btnEditProfile = document.querySelector('.profile__btn-edit-profile');
 const btnAddCard = document.querySelector('.profile__btn-add-place');
-const formEditProfile = document.querySelector('#form-edit-profile');
+const formEditProfile = popupProfile.querySelector('#form-edit-profile');
+const inputListProfile = Array.from(formEditProfile.querySelectorAll('.popup__input'));
 const formAddCard = document.querySelector('#form-add-card');
+const inputListAddCard = Array.from(formAddCard.querySelectorAll('.popup__input'));
 const inputName = document.querySelector('#input-name');
 const inputJob = document.querySelector('#input-job');
 const inputCardTitle = document.querySelector('#input-place');
@@ -19,21 +21,8 @@ const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const cards = document.querySelector('.cards');
 const cardTemplate = document.querySelector('#card').content;
-
-
-
-// Настройки для формы
-const validationConfig = {
-  formSelector: '.popup__container',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn',
-  inactiveButtonClass: 'popup__btn_disabled',
-  inputErrorClass: 'popup__input-error_active',
-  errorClass: 'popup__input_type_error'
-};
-
-
-
+const submitProfile = document.querySelector('.popup__btn_type_profile');
+const submitAddCard = document.querySelector('.popup__btn_type_add-card');
 
 // Открытие попапа
 function openPopup(popup) {
@@ -55,12 +44,14 @@ function popupCloseOverlay(event, popup) {
 }
 
 //Закрытие попапа по клавише Esc
-function popupCloseEsc(evt) {
-  if (evt.key === 'Escape') {
-    const popapOpened = document.querySelector('.popup_opened');
-    closePopup(popapOpened);
+function popupCloseEsc(event, popup) {
+  if (event.key === 'Escape') {
+    popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+    formAddCard.reset();
   }
 }
+
 
 //Функция лайка карточки
 function addCardLike(evt) {
@@ -134,18 +125,21 @@ btnEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   openPopup(popupProfile);
-  enableValidation();
+  resetValidation(inputListProfile, submitProfile, formEditProfile)
 
 })
 
 btnAddCard.addEventListener('click', function () {
   openPopup(popupAddCard);
-  enableValidation();
+  resetValidation(inputListAddCard, submitAddCard, formAddCard)
 
 })
 
 popupCloseProfile.addEventListener('click', () => closePopup(popupProfile));
-popupClosePlace.addEventListener('click', () => closePopup(popupAddCard));
+popupClosePlace.addEventListener('click', () => {
+  closePopup(popupAddCard);
+  formAddCard.reset();
+});
 popupCloseImage.addEventListener('click', () => closePopup(popupFullImage));
 formEditProfile.addEventListener('submit', formSubmitHandler);
 formAddCard.addEventListener('submit', formAddCardSubmit);
@@ -162,143 +156,3 @@ popupAddCard.addEventListener('click', function (evt) {
 popupFullImage.addEventListener('click', function (evt) {
   popupCloseOverlay(evt, popupFullImage);
 });
-
-
-
-
-
-
-// const formElement = document.querySelector('.popup__container');
-// const formInput = formElement.querySelector('.popup__input');
-// Выбираем элемент ошибки на основе уникального класса
-
-
-
-
-
-// formElement.addEventListener('submit', function (evt) {
-//   evt.preventDefault();
-// });
-
-// formInput.addEventListener('input', function (evt) {
-//   console.log(evt.target.validity)
-// });
-
-// Функция, которая добавляет класс с ошибкой
-// Передадим текст ошибки вторым параметром
-function showInputError(formElement, inputElement, errorMessage) {
-
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
-  inputElement.classList.add('popup__input_type_error');
-  // Заменим содержимое span с ошибкой на переданный параметр
-  errorElement.textContent = errorMessage;
-
-  errorElement.classList.add('popup__input-error_active');
-
-}
-
-// Функция, которая удаляет класс с ошибкой
-function hideInputError(formElement, inputElement) {
-
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
-  // Очистим ошибку
-  errorElement.textContent = '';
-}
-
-// Функция, которая проверяет валидность поля
-function isValid(formElement, inputElement) {
-  if (!inputElement.validity.valid) {
-    // Если поле не проходит валидацию, покажем ошибку
-    // Передадим сообщение об ошибке вторым аргументом
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-    //showInputError(formInput);
-  } else {
-    // Если проходит, скроем
-    hideInputError(formElement, inputElement);
-  }
-}
-
-// Вызовем функцию isValid на каждый ввод символа
-// formInput.addEventListener('input', isValid);
-
-function setEventListeners(formElement) {
-  // Находим все поля внутри формы,
-  // сделаем из них массив методом Array.from
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-
-  // Найдём в текущей форме кнопку отправки
-  const buttonElement = formElement.querySelector('.popup__btn');
-
-  toggleButtonState(inputList, buttonElement);
-  // Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
-
-
-  // Обойдём все элементы полученной коллекции
-  inputList.forEach((inputElement) => {
-    // каждому полю добавим обработчик события input
-    inputElement.addEventListener('input', () => {
-      // Внутри колбэка вызовем isValid,
-      // передав ей форму и проверяемый элемент
-      isValid(formElement, inputElement);
-
-
-      // Вызовем toggleButtonState и передадим ей массив полей и кнопку
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-}
-
-function enableValidation() {
-  // Найдём все формы с указанным классом в DOM,
-  // сделаем из них массив методом Array.from
-  const formList = Array.from(document.querySelectorAll('.popup__container_type_form'));
-
-  // Переберём полученную коллекцию
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      // У каждой формы отменим стандартное поведение
-      evt.preventDefault();
-    });
-
-    // Для каждой формы вызовем функцию setEventListeners,
-    // передав ей элемент формы
-    setEventListeners(formElement);
-  });
-}
-
-// Вызовем функцию
-enableValidation();
-
-
-// Функция принимает массив полей
-
-function hasInvalidInput(inputList) {
-  // проходим по этому массиву методом some
-  return inputList.some(inputElement => {
-    // Если поле не валидно, колбэк вернёт true
-    // Обход массива прекратится и вся фунцкция
-    // hasInvalidInput вернёт true
-    return !inputElement.validity.valid;
-  });
-}
-
-
-// Функция принимает массив полей ввода
-// и элемент кнопки, состояние которой нужно менять
-
-function toggleButtonState(inputList, buttonElement) {
-  // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputList)) {
-    // сделай кнопку неактивной
-    buttonElement.classList.add('popup__btn_disabled');
-    buttonElement.setAttribute('disabled', 'disabled');
-  } else {
-    // иначе сделай кнопку активной
-    buttonElement.classList.remove('popup__btn_disabled');
-    buttonElement.removeAttribute('disabled');
-  }
-}
