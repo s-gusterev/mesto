@@ -1,4 +1,4 @@
-// Настройки для формы
+// Настройки для валидации формы
 const validationConfig = {
   formSelector: '.popup__container_type_form',
   inputSelector: '.popup__input',
