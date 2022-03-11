@@ -21,15 +21,17 @@ export class Card {
   //Функция удаления карточки
   _deleteCard = () => {
     this._cardBody.remove();
+    this._cardBody = null;
   };
 
   // Открытие полного изображения
-  _openFullImage(evt) {
-    const image = evt.target;
-    popupImage.src = image.src;
-    popupImageDescription.textContent = image.alt;
+  _openFullImage = () => {
+    popupImage.src = this._link;
+    popupImage.alt = this._name;
+    popupImageDescription.textContent = this._name;
     openPopup(popupFullImage);
   }
+  
   //Слушатели
   _setEventListeners() {
     this._cardLike.addEventListener('click', this._addCardLike);
@@ -37,7 +39,7 @@ export class Card {
     this._cardImg.addEventListener('click', this._openFullImage);
   }
 
-// Шаблон карточки
+  // Шаблон карточки
   templateCard() {
     this._cardBody = this._cardTemplate.querySelector('.card').cloneNode(true);
     this._cardTitle = this._cardBody.querySelector('.card__title');

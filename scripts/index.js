@@ -20,9 +20,7 @@ const popupFullImage = document.querySelector('.popup_type_picture');
 const btnEditProfile = document.querySelector('.profile__btn-edit-profile');
 const btnAddCard = document.querySelector('.profile__btn-add-place');
 const formEditProfile = popupProfile.querySelector('#form-edit-profile');
-const inputListProfile = Array.from(formEditProfile.querySelectorAll('.popup__input'));
 const formAddCard = document.querySelector('#form-add-card');
-const inputListAddCard = Array.from(formAddCard.querySelectorAll('.popup__input'));
 const inputName = document.querySelector('#input-name');
 const inputJob = document.querySelector('#input-job');
 const inputCardTitle = document.querySelector('#input-place');
@@ -30,9 +28,6 @@ const inputCardImage = document.querySelector('#input-image');
 const profileName = document.querySelector('.profile__title');
 const profileJob = document.querySelector('.profile__subtitle');
 const cards = document.querySelector('.cards');
-const submitProfile = document.querySelector('.popup__btn_type_profile');
-const submitAddCard = document.querySelector('.popup__btn_type_add-card');
-
 
 // Настройки для валидации формы
 const validationConfig = {
@@ -61,35 +56,36 @@ function popupCloseOverlay(event, popup) {
 }
 
 // Функция формы редактирования профайла
-function formSubmitHandler(evt) {
+function handleFormProfileSubmit(evt) {
   profileName.textContent = inputName.value;
   profileJob.textContent = inputJob.value;
   closePopup(popupProfile);
 }
 
-function formAddCardSubmit(evt) {
+//Функция формы добавления карточки
+function handleFormAddCardSubmit(evt) {
   const data = {
     name: inputCardTitle.value,
     link: inputCardImage.value
   }
-  const cardRender = new Card(data, '#card');
-  const cardElement = cardRender.templateCard();
-  addCard(cardElement);
+  addCard(data);
   closePopup(popupAddCard);
   formAddCard.reset();
 }
 
+// Рендер карточек из массива
 function renderCards() {
   initialCards.forEach(function (card) {
-    const cardRender = new Card(card, '#card');
-    const cardElement = cardRender.templateCard();
-    addCard(cardElement);
+    addCard(card);
   })
 };
 
 // Добавление карточки в разметку
+
 function addCard(card) {
-  cards.prepend(card)
+  const cardRender = new Card(card, '#card');
+  const cardElement = cardRender.templateCard();
+  cards.prepend(cardElement)
 }
 
 renderCards();
@@ -98,17 +94,16 @@ btnEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   openPopup(popupProfile);
-  profileValid.resetValidation(inputListProfile, submitProfile);
-
+  cardValid.resetValidation();
 })
 
 btnAddCard.addEventListener('click', function () {
   openPopup(popupAddCard);
-  cardValid.resetValidation(inputListAddCard, submitAddCard);
+  cardValid.resetValidation();
 })
 
-formEditProfile.addEventListener('submit', formSubmitHandler);
-formAddCard.addEventListener('submit', formAddCardSubmit);
+formEditProfile.addEventListener('submit', handleFormProfileSubmit);
+formAddCard.addEventListener('submit', handleFormAddCardSubmit);
 
 
 popupProfile.addEventListener('mousedown', function (evt) {
