@@ -6,8 +6,8 @@ import {
 } from './Card.js';
 
 import {
-  openPopup,
-  closePopup
+  // openPopup,
+  // closePopup
 } from './utils.js';
 
 import {
@@ -17,6 +17,10 @@ import {
 import {
   Section
 } from './Section.js';
+
+import {
+  Popup
+} from './Popup.js'
 
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_card-add');
@@ -52,15 +56,18 @@ cardValid.enableValidation();
 
 
 
+const formProfile = new Popup(popupProfile);
+formProfile.close();
+formProfile.setEventListeners();
 
 // Закрытие попапа кликом на overlay и крестик
-function popupCloseOverlay(event, popup) {
-  if (event.target === event.currentTarget) {
-    closePopup(popup);
-  } else if (event.target.classList.contains('popup__close')) {
-    closePopup(popup)
-  }
-}
+// function popupCloseOverlay(event, popup) {
+//   if (event.target === event.currentTarget) {
+//     closePopup(popup);
+//   } else if (event.target.classList.contains('popup__close')) {
+//     closePopup(popup)
+//   }
+// }
 
 // Функция формы редактирования профайла
 function handleFormProfileSubmit(evt) {
@@ -117,7 +124,8 @@ InitialCards.renderItems();
 btnEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
-  openPopup(popupProfile);
+  formProfile.open();
+  // openPopup(popupProfile);
   profileValid.resetValidation();
 })
 
@@ -130,14 +138,16 @@ formEditProfile.addEventListener('submit', handleFormProfileSubmit);
 formAddCard.addEventListener('submit', handleFormAddCardSubmit);
 
 
-popupProfile.addEventListener('mousedown', function (evt) {
-  popupCloseOverlay(evt, popupProfile);
-});
+// popupProfile.addEventListener('mousedown', function (evt) {
+//   popupCloseOverlay(evt, popupProfile);
+// });
 
-popupAddCard.addEventListener('mousedown', function (evt) {
-  popupCloseOverlay(evt, popupAddCard);
-});
 
-popupFullImage.addEventListener('click', function (evt) {
-  popupCloseOverlay(evt, popupFullImage);
-});
+
+// popupAddCard.addEventListener('mousedown', function (evt) {
+//   popupCloseOverlay(evt, popupAddCard);
+// });
+
+// popupFullImage.addEventListener('click', function (evt) {
+//   popupCloseOverlay(evt, popupFullImage);
+// });

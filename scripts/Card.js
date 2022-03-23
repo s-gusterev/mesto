@@ -2,7 +2,7 @@ import {
   popupImage,
   popupImageDescription,
   popupFullImage,
-  openPopup
+  // openPopup
 } from './utils.js'
 
 
@@ -31,7 +31,7 @@ export class Card {
     popupImageDescription.textContent = this._name;
     openPopup(popupFullImage);
   }
-  
+
   //Слушатели
   _setEventListeners() {
     this._cardLike.addEventListener('click', this._addCardLike);
