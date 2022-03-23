@@ -5,8 +5,7 @@ import {
   Card
 } from './Card.js';
 
-import {
-} from './utils.js';
+import {} from './utils.js';
 
 import {
   initialCards
@@ -26,6 +25,10 @@ import {
 }
 from './PopupWithForm.js';
 
+import {
+  UserInfo
+} from './UserInfo.js';
+
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_card-add');
 const popupFullImage = document.querySelector('.popup_type_picture');
@@ -37,8 +40,8 @@ const inputName = document.querySelector('#input-name');
 const inputJob = document.querySelector('#input-job');
 const inputCardTitle = document.querySelector('#input-place');
 const inputCardImage = document.querySelector('#input-image');
-const profileName = document.querySelector('.profile__title');
-const profileJob = document.querySelector('.profile__subtitle');
+// const profileName = document.querySelector('.profile__title');
+// const profileJob = document.querySelector('.profile__subtitle');
 const cards = document.querySelector('.cards');
 
 // Настройки для валидации формы
@@ -58,10 +61,14 @@ profileValid.enableValidation();
 const cardValid = new FormValidator(validationConfig, formAddCard);
 cardValid.enableValidation();
 
+const userInformation = new UserInfo({
+  titleSelector: '.profile__title',
+  subtitleSelector: '.profile__subtitle'
+})
+
 const formProfile = new PopupWithForm(popupProfile, {
-  callback: () => {
-    profileName.textContent = inputName.value;
-    profileJob.textContent = inputJob.value;
+  callback: (user) => {
+    userInformation.setUserInfo(user);
   }
 });
 formProfile.close();
@@ -84,7 +91,6 @@ const InitialCards = new Section({
   renderer: (item) => {
     const card = new Card(item, '#card');
     const cardElement = card.templateCard();
-
     InitialCards.addItem(cardElement);
   }
 }, cards);
@@ -105,8 +111,10 @@ function renderCard(card) {
 
 
 btnEditProfile.addEventListener('click', function () {
-  inputName.value = profileName.textContent;
-  inputJob.value = profileJob.textContent;
+  const user = userInformation.getUserInfo();
+  inputName.value = user.name;
+  inputJob.value = user.job;
+
   formProfile.open();
   profileValid.resetValidation();
 })
