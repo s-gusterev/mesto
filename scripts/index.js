@@ -6,8 +6,6 @@ import {
 } from './Card.js';
 
 import {
-  // openPopup,
-  // closePopup
 } from './utils.js';
 
 import {
@@ -19,8 +17,14 @@ import {
 } from './Section.js';
 
 import {
-  Popup
-} from './Popup.js'
+  PopupWithImage
+}
+from './PopupWithImage.js';
+
+import {
+  PopupWithForm
+}
+from './PopupWithForm.js';
 
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_card-add');
@@ -38,7 +42,7 @@ const profileJob = document.querySelector('.profile__subtitle');
 const cards = document.querySelector('.cards');
 
 // Настройки для валидации формы
-const validationConfig = {
+export const validationConfig = {
   formSelector: '.popup__container_type_form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__btn',
@@ -49,44 +53,31 @@ const validationConfig = {
 
 
 const profileValid = new FormValidator(validationConfig, formEditProfile);
-const cardValid = new FormValidator(validationConfig, formAddCard);
-
 profileValid.enableValidation();
+
+const cardValid = new FormValidator(validationConfig, formAddCard);
 cardValid.enableValidation();
 
-
-
-const formProfile = new Popup(popupProfile);
+const formProfile = new PopupWithForm(popupProfile, {
+  callback: () => {
+    profileName.textContent = inputName.value;
+    profileJob.textContent = inputJob.value;
+  }
+});
 formProfile.close();
 formProfile.setEventListeners();
 
-// Закрытие попапа кликом на overlay и крестик
-// function popupCloseOverlay(event, popup) {
-//   if (event.target === event.currentTarget) {
-//     closePopup(popup);
-//   } else if (event.target.classList.contains('popup__close')) {
-//     closePopup(popup)
-//   }
-// }
-
-// Функция формы редактирования профайла
-function handleFormProfileSubmit(evt) {
-  profileName.textContent = inputName.value;
-  profileJob.textContent = inputJob.value;
-  closePopup(popupProfile);
-}
-
-//Функция формы добавления карточки
-function handleFormAddCardSubmit(evt) {
-  const data = {
-    name: inputCardTitle.value,
-    link: inputCardImage.value
+const formCard = new PopupWithForm(popupAddCard, {
+  callback: () => {
+    const data = {
+      name: inputCardTitle.value,
+      link: inputCardImage.value
+    }
+    addCard(data);
   }
-  addCard(data);
-  closePopup(popupAddCard);
-  formAddCard.reset();
-}
-
+});
+formCard.close();
+formCard.setEventListeners();
 
 const InitialCards = new Section({
   items: initialCards,
@@ -100,54 +91,27 @@ const InitialCards = new Section({
 
 InitialCards.renderItems();
 
-// Рендер карточек из массива
-// function renderInitialCards() {
-//   initialCards.forEach(function (card) {
-//     addCard(card);
-//   })
-// };
-
 // Добавление карточки в разметку
-// function addCard(card) {
-//   cards.prepend(renderCard(card))
-// }
+function addCard(card) {
+  cards.prepend(renderCard(card))
+}
 
 // Создание карточки
-// function renderCard(card) {
-//   const cardRender = new Card(card, '#card');
-//   const cardElement = cardRender.templateCard();
-//   return cardElement;
-// }
+function renderCard(card) {
+  const cardRender = new Card(card, '#card');
+  const cardElement = cardRender.templateCard();
+  return cardElement;
+}
 
-// renderInitialCards();
 
 btnEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
   inputJob.value = profileJob.textContent;
   formProfile.open();
-  // openPopup(popupProfile);
   profileValid.resetValidation();
 })
 
 btnAddCard.addEventListener('click', function () {
-  openPopup(popupAddCard);
+  formCard.open();
   cardValid.resetValidation();
 })
-
-formEditProfile.addEventListener('submit', handleFormProfileSubmit);
-formAddCard.addEventListener('submit', handleFormAddCardSubmit);
-
-
-// popupProfile.addEventListener('mousedown', function (evt) {
-//   popupCloseOverlay(evt, popupProfile);
-// });
-
-
-
-// popupAddCard.addEventListener('mousedown', function (evt) {
-//   popupCloseOverlay(evt, popupAddCard);
-// });
-
-// popupFullImage.addEventListener('click', function (evt) {
-//   popupCloseOverlay(evt, popupFullImage);
-// });

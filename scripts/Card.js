@@ -25,12 +25,12 @@ export class Card {
   };
 
   // Открытие полного изображения
-  _openFullImage = () => {
-    popupImage.src = this._link;
-    popupImage.alt = this._name;
-    popupImageDescription.textContent = this._name;
-    openPopup(popupFullImage);
-  }
+  // _openFullImage = () => {
+  //   popupImage.src = this._link;
+  //   popupImage.alt = this._name;
+  //   popupImageDescription.textContent = this._name;
+  //   openPopup(popupFullImage);
+  // }
 
   //Слушатели
   _setEventListeners() {
