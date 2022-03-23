@@ -8,11 +8,15 @@ import {
 import {
   openPopup,
   closePopup
-} from './utils.js'
+} from './utils.js';
 
 import {
   initialCards
-} from './cards.js'
+} from './cards.js';
+
+import {
+  Section
+} from './Section.js';
 
 const popupProfile = document.querySelector('.popup_type_profile');
 const popupAddCard = document.querySelector('.popup_type_card-add');
@@ -46,6 +50,9 @@ const cardValid = new FormValidator(validationConfig, formAddCard);
 profileValid.enableValidation();
 cardValid.enableValidation();
 
+
+
+
 // Закрытие попапа кликом на overlay и крестик
 function popupCloseOverlay(event, popup) {
   if (event.target === event.currentTarget) {
@@ -73,26 +80,39 @@ function handleFormAddCardSubmit(evt) {
   formAddCard.reset();
 }
 
+
+const InitialCards = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    const card = new Card(item, '#card');
+    const cardElement = card.templateCard();
+
+    InitialCards.addItem(cardElement);
+  }
+}, cards);
+
+InitialCards.renderItems();
+
 // Рендер карточек из массива
-function renderInitialCards() {
-  initialCards.forEach(function (card) {
-    addCard(card);
-  })
-};
+// function renderInitialCards() {
+//   initialCards.forEach(function (card) {
+//     addCard(card);
+//   })
+// };
 
 // Добавление карточки в разметку
-function addCard(card) {
-  cards.prepend(renderCard(card))
-}
+// function addCard(card) {
+//   cards.prepend(renderCard(card))
+// }
 
 // Создание карточки
-function renderCard(card) {
-  const cardRender = new Card(card, '#card');
-  const cardElement = cardRender.templateCard();
-  return cardElement;
-}
+// function renderCard(card) {
+//   const cardRender = new Card(card, '#card');
+//   const cardElement = cardRender.templateCard();
+//   return cardElement;
+// }
 
-renderInitialCards();
+// renderInitialCards();
 
 btnEditProfile.addEventListener('click', function () {
   inputName.value = profileName.textContent;
