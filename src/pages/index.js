@@ -1,70 +1,54 @@
+import './index.css';
+import {
+  popupProfile,
+  popupAddCard,
+  popupFullImage,
+  btnEditProfile,
+  btnAddCard,
+  formEditProfile,
+  formAddCard,
+  inputName,
+  inputJob,
+  inputCardTitle,
+  inputCardImage,
+  cards,
+  popupImage,
+  popupImageDescription,
+  validationConfig,
+} from '../components/constans.js'
+
 import {
   FormValidator
-} from './FormValidator.js';
+} from '../components/FormValidator.js';
+
 import {
   Card
-} from './Card.js';
-
-// import {
-//   popupImage
-// } from './utils.js';
+}
+from '../components/Card.js';
 
 import {
   initialCards
-} from './cards.js';
+}
+from '../components/cards.js';
 
 import {
   Section
-} from './Section.js';
+}
+from '../components/Section.js';
 
 import {
   PopupWithImage
 }
-from './PopupWithImage.js';
+from '../components/PopupWithImage.js';
 
 import {
   PopupWithForm
 }
-from './PopupWithForm.js';
+from '../components/PopupWithForm.js';
 
 import {
   UserInfo
-} from './UserInfo.js';
-
-const popupProfile = document.querySelector('.popup_type_profile');
-const popupAddCard = document.querySelector('.popup_type_card-add');
-const popupFullImage = document.querySelector('.popup_type_picture');
-const btnEditProfile = document.querySelector('.profile__btn-edit-profile');
-const btnAddCard = document.querySelector('.profile__btn-add-place');
-const formEditProfile = document.querySelector('#form-edit-profile');
-const formAddCard = document.querySelector('#form-add-card');
-const inputName = document.querySelector('#input-name');
-const inputJob = document.querySelector('#input-job');
-const inputCardTitle = document.querySelector('#input-place');
-const inputCardImage = document.querySelector('#input-image');
-// const profileName = document.querySelector('.profile__title');
-// const profileJob = document.querySelector('.profile__subtitle');
-const cards = document.querySelector('.cards');
-
-// export const image = document.querySelector('.card__img');
-
-export const popupImage = document.querySelector('.popup__img');
-export const popupImageDescription = document.querySelector('.popup__img-description');
-
-// Настройки для валидации формы
-export const validationConfig = {
-  formSelector: '.popup__container_type_form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__btn',
-  inactiveButtonClass: 'popup__btn_disabled',
-  inputErrorClass: 'popup__input-error_active',
-  errorClass: 'popup__input_type_error'
-};
-
-
-const openImagePopup = new PopupWithImage(popupFullImage, popupImage, popupImageDescription);
-
-openImagePopup.setEventListeners();
+} from '../components/UserInfo.js';
 
 
 const profileValid = new FormValidator(validationConfig, formEditProfile);
@@ -97,6 +81,11 @@ const formCard = new PopupWithForm(popupAddCard, {
 });
 formCard.close();
 formCard.setEventListeners();
+
+
+const openImagePopup = new PopupWithImage(popupFullImage, popupImage, popupImageDescription);
+
+openImagePopup.setEventListeners();
 
 // Изначальная загрузка карточек
 const InitialCards = new Section({

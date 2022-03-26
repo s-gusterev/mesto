@@ -1,12 +1,3 @@
-// import {
-//   popupImage,
-//   popupImageDescription,
-//   popupFullImage,
-//   // openPopup
-// } from './index.js'
-
-// import {image} from './index.js'
-
 export class Card {
   constructor(data, template, handleCardClick) {
     this._cardTemplate = document.querySelector(template).content;
@@ -25,14 +16,6 @@ export class Card {
     this._cardBody.remove();
     this._cardBody = null;
   };
-
-  // Открытие полного изображения
-  // _openFullImage = () => {
-  //   popupImage.src = this._link;
-  //   popupImage.alt = this._name;
-  //   popupImageDescription.textContent = this._name;
-  //   openPopup(popupFullImage);
-  // }
 
   //Слушатели
   _setEventListeners() {

@@ -5,7 +5,6 @@ export class Section {
   }, containerSelector) {
     this._initialArray = items;
     this._renderer = renderer;
-    // this._container = document.querySelector(containerSelector);
     this._container = containerSelector;
   }
 
