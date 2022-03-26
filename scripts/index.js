@@ -5,7 +5,9 @@ import {
   Card
 } from './Card.js';
 
-import {} from './utils.js';
+// import {
+//   popupImage
+// } from './utils.js';
 
 import {
   initialCards
@@ -44,6 +46,11 @@ const inputCardImage = document.querySelector('#input-image');
 // const profileJob = document.querySelector('.profile__subtitle');
 const cards = document.querySelector('.cards');
 
+// export const image = document.querySelector('.card__img');
+
+export const popupImage = document.querySelector('.popup__img');
+export const popupImageDescription = document.querySelector('.popup__img-description');
+
 // Настройки для валидации формы
 export const validationConfig = {
   formSelector: '.popup__container_type_form',
@@ -53,6 +60,11 @@ export const validationConfig = {
   inputErrorClass: 'popup__input-error_active',
   errorClass: 'popup__input_type_error'
 };
+
+
+const openImagePopup = new PopupWithImage(popupFullImage, popupImage, popupImageDescription);
+
+openImagePopup.setEventListeners();
 
 
 const profileValid = new FormValidator(validationConfig, formEditProfile);
@@ -86,10 +98,13 @@ const formCard = new PopupWithForm(popupAddCard, {
 formCard.close();
 formCard.setEventListeners();
 
+// Изначальная загрузка карточек
 const InitialCards = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '#card');
+    const card = new Card(item, '#card', () => {
+      openImagePopup.open(item.link, item.name);
+    });
     const cardElement = card.templateCard();
     InitialCards.addItem(cardElement);
   }
@@ -104,7 +119,9 @@ function addCard(card) {
 
 // Создание карточки
 function renderCard(card) {
-  const cardRender = new Card(card, '#card');
+  const cardRender = new Card(card, '#card', () => {
+    openImagePopup.open(card.link, card.name);
+  });
   const cardElement = cardRender.templateCard();
   return cardElement;
 }
@@ -114,7 +131,6 @@ btnEditProfile.addEventListener('click', function () {
   const user = userInformation.getUserInfo();
   inputName.value = user.name;
   inputJob.value = user.job;
-
   formProfile.open();
   profileValid.resetValidation();
 })

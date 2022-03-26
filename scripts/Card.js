@@ -1,16 +1,18 @@
-import {
-  popupImage,
-  popupImageDescription,
-  popupFullImage,
-  // openPopup
-} from './utils.js'
+// import {
+//   popupImage,
+//   popupImageDescription,
+//   popupFullImage,
+//   // openPopup
+// } from './index.js'
 
+// import {image} from './index.js'
 
 export class Card {
-  constructor(data, template) {
+  constructor(data, template, handleCardClick) {
     this._cardTemplate = document.querySelector(template).content;
     this._name = data.name;
     this._link = data.link;
+    this._handleCardClick = handleCardClick;
   }
 
   //Функция лайка карточки
@@ -36,7 +38,7 @@ export class Card {
   _setEventListeners() {
     this._cardLike.addEventListener('click', this._addCardLike);
     this._cardDel.addEventListener('click', this._deleteCard);
-    this._cardImg.addEventListener('click', this._openFullImage);
+    this._cardImg.addEventListener('click', this._handleCardClick);
   }
 
   // Шаблон карточки
