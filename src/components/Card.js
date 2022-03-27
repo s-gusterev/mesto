@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
   constructor(data, template, handleCardClick) {
     this._cardTemplate = document.querySelector(template).content;
     this._name = data.name;
@@ -25,7 +25,7 @@ export class Card {
   }
 
   // Шаблон карточки
-  templateCard() {
+  getCard() {
     this._cardBody = this._cardTemplate.querySelector('.card').cloneNode(true);
     this._cardTitle = this._cardBody.querySelector('.card__title');
     this._cardImg = this._cardBody.querySelector('.card__img');

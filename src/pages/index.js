@@ -1,54 +1,26 @@
 import './index.css';
 import {
-  popupProfile,
-  popupAddCard,
-  popupFullImage,
   btnEditProfile,
   btnAddCard,
   formEditProfile,
   formAddCard,
   inputName,
   inputJob,
-  inputCardTitle,
-  inputCardImage,
-  cards,
-  popupImage,
-  popupImageDescription,
   validationConfig,
+  initialCards
 } from '../components/constans.js'
 
-import {
-  FormValidator
-} from '../components/FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 
-import {
-  Card
-}
-from '../components/Card.js';
+import Card from '../components/Card.js';
 
-import {
-  initialCards
-}
-from '../components/cards.js';
+import Section from '../components/Section.js';
 
-import {
-  Section
-}
-from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 
-import {
-  PopupWithImage
-}
-from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
 
-import {
-  PopupWithForm
-}
-from '../components/PopupWithForm.js';
-
-import {
-  UserInfo
-} from '../components/UserInfo.js';
+import UserInfo from '../components/UserInfo.js';
 
 
 const profileValid = new FormValidator(validationConfig, formEditProfile);
@@ -62,59 +34,44 @@ const userInformation = new UserInfo({
   subtitleSelector: '.profile__subtitle'
 })
 
-const formProfile = new PopupWithForm(popupProfile, {
-  callback: (user) => {
-    userInformation.setUserInfo(user);
-  }
-});
-formProfile.close();
+
+const formProfile = new PopupWithForm('.popup_type_profile', (user) => userInformation.setUserInfo(user));
+
 formProfile.setEventListeners();
-
-const formCard = new PopupWithForm(popupAddCard, {
-  callback: () => {
-    const data = {
-      name: inputCardTitle.value,
-      link: inputCardImage.value
-    }
-    addCard(data);
-  }
-});
-formCard.close();
-formCard.setEventListeners();
-
-
-const openImagePopup = new PopupWithImage(popupFullImage, popupImage, popupImageDescription);
-
-openImagePopup.setEventListeners();
-
-// Изначальная загрузка карточек
-const InitialCards = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, '#card', () => {
-      openImagePopup.open(item.link, item.name);
-    });
-    const cardElement = card.templateCard();
-    InitialCards.addItem(cardElement);
-  }
-}, cards);
-
-InitialCards.renderItems();
 
 // Добавление карточки в разметку
 function addCard(card) {
-  cards.prepend(renderCard(card))
+  section.addItem(createCard(card))
 }
 
 // Создание карточки
-function renderCard(card) {
+function createCard(card) {
   const cardRender = new Card(card, '#card', () => {
     openImagePopup.open(card.link, card.name);
   });
-  const cardElement = cardRender.templateCard();
+  const cardElement = cardRender.getCard();
   return cardElement;
 }
 
+const section = new Section({
+  items: initialCards,
+  renderer: addCard
+}, '.cards');
+section.renderItems();
+
+const formCard = new PopupWithForm('.popup_type_card-add',
+  (data) => {
+    const card = createCard({
+      name: data['place'],
+      link: data['image']
+    })
+    section.addItem(card)
+  }
+);
+formCard.setEventListeners();
+
+const openImagePopup = new PopupWithImage('.popup_type_picture');
+openImagePopup.setEventListeners();
 
 btnEditProfile.addEventListener('click', function () {
   const user = userInformation.getUserInfo();

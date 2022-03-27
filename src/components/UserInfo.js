@@ -1,12 +1,11 @@
-export class UserInfo {
+export default class UserInfo {
   constructor({
     titleSelector,
     subtitleSelector
   }) {
-    this._titleSelector = titleSelector;
-    this._subtitleSelector = subtitleSelector;
-    this._title = document.querySelector(this._titleSelector);
-    this._subtitle = document.querySelector(this._subtitleSelector);
+    this._title = document.querySelector(titleSelector);
+    this._subtitle = document.querySelector(subtitleSelector);
+
   }
   getUserInfo() {
     this.user = {

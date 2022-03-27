@@ -1,17 +1,16 @@
-export const popupProfile = document.querySelector('.popup_type_profile');
-export const popupAddCard = document.querySelector('.popup_type_card-add');
-export const popupFullImage = document.querySelector('.popup_type_picture');
+import moscowImage from '../images/moscow.jpg';
+import niagaraImage from '../images/niagara.jpg';
+import newYorkCityImage from '../images/new-york-city.jpg';
+import osloImage from '../images/oslo.jpg';
+import sanFranciscoImage from '../images/san-francisco.jpg';
+import elbrusImage from '../images/elbrus.jpg';
+
 export const btnEditProfile = document.querySelector('.profile__btn-edit-profile');
 export const btnAddCard = document.querySelector('.profile__btn-add-place');
 export const formEditProfile = document.querySelector('#form-edit-profile');
 export const formAddCard = document.querySelector('#form-add-card');
 export const inputName = document.querySelector('#input-name');
 export const inputJob = document.querySelector('#input-job');
-export const inputCardTitle = document.querySelector('#input-place');
-export const inputCardImage = document.querySelector('#input-image');
-export const cards = document.querySelector('.cards');
-export const popupImage = document.querySelector('.popup__img');
-export const popupImageDescription = document.querySelector('.popup__img-description');
 
 // Настройки для валидации формы
 export const validationConfig = {
@@ -22,3 +21,29 @@ export const validationConfig = {
   inputErrorClass: 'popup__input-error_active',
   errorClass: 'popup__input_type_error'
 };
+
+export const initialCards = [{
+    name: 'Москва',
+    link: moscowImage
+  },
+  {
+    name: 'Ниагарский водопад',
+    link: niagaraImage
+  },
+  {
+    name: 'Нью-Йорк',
+    link: newYorkCityImage
+  },
+  {
+    name: 'Осло',
+    link: osloImage
+  },
+  {
+    name: 'Сан-Франциско',
+    link: sanFranciscoImage
+  },
+  {
+    name: 'Гора Эльбрус',
+    link: elbrusImage
+  }
+];
