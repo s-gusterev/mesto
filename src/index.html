@@ -13,15 +13,19 @@
   <div class="root__container">
 
     <header class="header root__header">
-      <a href="./index.html" class="logo header__logo"><img
-          src="<%=require('./images/logo.svg')%>" alt="Логотип" class="logo__img"></a>
+      <a href="./index.html" class="logo header__logo"><img src="<%=require('./images/logo.svg')%>" alt="Логотип"
+          class="logo__img"></a>
     </header>
 
     <main class="main">
 
       <section class="profile main__profile">
         <div class="profile__info">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя" class="profile__img">
+          <div class="profile__avatar">
+            <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя" class="profile__img">
+            <button class="profile__btn-edit-avatar" type="button"></button>
+          </div>
+
           <div class="profile__name">
             <h1 class="profile__title">Жак-Ив Кусто</h1>
             <p class="profile__subtitle">Исследователь океана</p>
@@ -85,11 +89,35 @@
     </div>
   </div>
 
+  <div class="popup popup_background_light popup_type_confirm root__popup" id="confirm">
+    <form class="popup__container popup__container_type_form" name="popup-confirm" id="form-confirm" novalidate>
+      <h2 class="popup__title popup__title_type_confirm">Вы уверены?</h2>
+      <button class="popup__btn popup__btn_type_confirm" type="submit">Создать</button>
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+    </form>
+  </div>
+
+  <div class="popup popup_background_light popup_type_edit-avatar root__popup" id="popup-edit-avatar">
+    <form class="popup__container popup__container_type_form" name="popup-edit-avatar" id="form-edit-avatar" novalidate>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <label class="popup__label" for="input-avatar">
+        <input class="popup__input" type="url" name="avatar" id="input-avatar" required placeholder="Ссылка на аватар">
+        <span class="popup__input-error input-avatar-error"></span>
+      </label>
+      <button class="popup__btn popup__btn_type_edit-avatar root__btn" type="submit">Сохранить</button>
+      <button class="popup__close" type="button" aria-label="Закрыть"></button>
+    </form>
+  </div>
+
   <template id="card">
     <li class="card">
       <div class="card__text">
         <h2 class="card__title"></h2>
-        <button class="card__like" type="button"></button>
+        <div class="card__like-section">
+          <button class="card__like" type="button"></button>
+          <span class="card__like-info">0</span>
+        </div>
+
       </div>
       <img class="card__img" src="#" alt="изображение">
       <button class="card__del" type="button"></button>
