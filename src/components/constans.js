@@ -7,10 +7,13 @@ import elbrusImage from '../images/elbrus.jpg';
 
 export const btnEditProfile = document.querySelector('.profile__btn-edit-profile');
 export const btnAddCard = document.querySelector('.profile__btn-add-place');
+export const btnEditAvatar = document.querySelector('.profile__btn-edit-avatar');
 export const formEditProfile = document.querySelector('#form-edit-profile');
 export const formAddCard = document.querySelector('#form-add-card');
+export const formEditAvatar = document.querySelector('#form-edit-avatar');
 export const inputName = document.querySelector('#input-name');
-export const inputJob = document.querySelector('#input-job');
+export const inputJob = document.querySelector('#input-about');
+export const inputAvatar = document.querySelector('#input-avatar');
 
 // Настройки для валидации формы
 export const validationConfig = {

@@ -16,7 +16,7 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submit(this._getInputValues());
-      this.close();
+      // this.close();
     })
   }
 
@@ -25,6 +25,11 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
+  changeSubmitHandler(newSubmitHandle) {
+    this._submit = newSubmitHandle;
+  }
+
+  // Перебираем инпуты => помещаем в объект
   _getInputValues() {
     this._value = {};
     this._inputList.forEach((item) => {

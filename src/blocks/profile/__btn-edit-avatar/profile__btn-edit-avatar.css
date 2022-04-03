@@ -12,7 +12,7 @@
   opacity: 0;
   cursor: pointer;
   transition: opacity .25s ease;
-
+  border-radius: 50%;
 }
 
 .profile__btn-edit-avatar:hover {

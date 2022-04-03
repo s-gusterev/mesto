@@ -22,13 +22,14 @@
       <section class="profile main__profile">
         <div class="profile__info">
           <div class="profile__avatar">
-            <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя" class="profile__img">
-            <button class="profile__btn-edit-avatar" type="button"></button>
+            <img src="" alt="Аватар пользователя" class="profile__img">
+            <!-- <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар пользователя" class="profile__img"> -->
+            <button class="profile__btn-edit-avatar" type="button" aria-label="Редактировать аватар"></button>
           </div>
 
           <div class="profile__name">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
-            <p class="profile__subtitle">Исследователь океана</p>
+            <h1 class="profile__title"></h1>
+            <p class="profile__subtitle"></p>
             <button class="profile__btn-edit-profile" type="button" aria-label="Редактировать данные профиля"></button>
           </div>
           <button class="profile__btn-add-place" type="button" aria-label="Добавить место"></button>
@@ -52,10 +53,10 @@
             maxlength="40">
           <span class="popup__input-error input-name-error"></span>
         </label>
-        <label class="popup__label" for="input-job">
-          <input class="popup__input" type="text" name="job" id="input-job" required placeholder="Род деятельности"
+        <label class="popup__label" for="input-about">
+          <input class="popup__input" type="text" name="about" id="input-about" required placeholder="Род деятельности"
             minlength="2" maxlength="200">
-          <span class="popup__input-error input-job-error"></span>
+          <span class="popup__input-error input-about-error"></span>
         </label>
         <button class="popup__btn popup__btn_type_profile root__btn" type="submit">Сохранить</button>
         <button class="popup__close" type="button" aria-label="Закрыть"></button>
@@ -92,7 +93,7 @@
   <div class="popup popup_background_light popup_type_confirm root__popup" id="confirm">
     <form class="popup__container popup__container_type_form" name="popup-confirm" id="form-confirm" novalidate>
       <h2 class="popup__title popup__title_type_confirm">Вы уверены?</h2>
-      <button class="popup__btn popup__btn_type_confirm" type="submit">Создать</button>
+      <button class="popup__btn popup__btn_type_confirm" type="submit">Да</button>
       <button class="popup__close" type="button" aria-label="Закрыть"></button>
     </form>
   </div>
@@ -115,7 +116,7 @@
         <h2 class="card__title"></h2>
         <div class="card__like-section">
           <button class="card__like" type="button"></button>
-          <span class="card__like-info">0</span>
+          <span class="card__like-info"></span>
         </div>
 
       </div>

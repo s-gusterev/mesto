@@ -1,7 +1,5 @@
 .profile__avatar {
   margin-right: 26px;
-  border-radius: 50%;
-  overflow: hidden;
   display: grid;
   grid-template-columns: 120px;
   grid-template-rows: 120px;
