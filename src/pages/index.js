@@ -9,8 +9,11 @@ import {
   inputName,
   inputJob,
   inputAvatar,
+  btnSubmitCards,
+  btnSubmitAvatar,
+  btnSubmitProfile,
   validationConfig
-} from '../components/constans.js'
+} from '../utils/constans.js'
 
 import FormValidator from '../components/FormValidator.js';
 
@@ -49,34 +52,50 @@ const userInformation = new UserInfo({
   avatarSelector: '.profile__img'
 })
 
-api.getProfile()
-  .then((res) => {
-    userInformation.setUserInfo(res)
-    userInformation.setUserAvatar(res)
-    userId = res._id;
-  });
+Promise.all([api.getProfile(), api.getInitialCards()])
+  .then(([user, cards]) => {
+    userInformation.setUserInfo(user)
+    userInformation.setUserAvatar(user)
+    userId = user._id
+
+    section.renderItems(cards)
+
+  })
+  .catch((err) => {
+    console.log(err)
+  })
 
 const formProfile = new PopupWithForm('.popup_type_profile', (data) => {
   const {
     name,
     about
   } = data;
-  document.querySelector('.popup__btn_type_profile').textContent = 'Сохранение...'
-  api.editProfile(name, about).then((res) => userInformation.setUserInfo(res))
+  btnSubmitProfile.textContent = 'Сохранение...'
+  api.editProfile(name, about).then((res) => {
+      userInformation.setUserInfo(res);
+      formProfile.close();
+    })
     .finally(() => {
-      document.querySelector('.popup__btn_type_profile').textContent = 'Сохранить'
-      formProfile.close()
+      btnSubmitProfile.textContent = 'Сохранить'
+    })
+    .catch((err) => {
+      console.log(err)
     })
 })
 formProfile.setEventListeners();
 
 const formAvatar = new PopupWithForm('.popup_type_edit-avatar', (data) => {
-  document.querySelector('.popup__btn_type_edit-avatar').textContent = 'Сохранение...';
+  btnSubmitAvatar.textContent = 'Сохранение...';
   api.updateAvatar(data.avatar)
-    .then((res) => userInformation.setUserAvatar(res))
-    .finally(() => {
-      document.querySelector('.popup__btn_type_edit-avatar').textContent = 'Сохранить';
+    .then((res) => {
+      userInformation.setUserAvatar(res)
       formAvatar.close();
+    })
+    .finally(() => {
+      btnSubmitAvatar.textContent = 'Сохранить';
+    })
+    .catch((err) => {
+      console.log(err)
     })
 });
 formAvatar.setEventListeners();
@@ -88,7 +107,17 @@ function addCard(card) {
 }
 
 function createCard(card) {
-  const cardRender = new Card(card, '#card', () => {
+
+  const data = {
+    name: card.name,
+    link: card.link,
+    likes: card.likes,
+    id: card._id,
+    userId: userId,
+    ownerId: card.owner._id
+  }
+
+  const cardRender = new Card(data, '#card', () => {
       openImagePopup.open(card.link, card.name);
     },
     (id) => {
@@ -99,6 +128,9 @@ function createCard(card) {
             cardRender.deleteCard()
             confirm.close()
           })
+          .catch((err) => {
+            console.log(err)
+          })
       })
     },
     (id) => {
@@ -107,10 +139,16 @@ function createCard(card) {
           .then((res) => {
             cardRender.setLikeCount(res.likes);
           })
+          .catch((err) => {
+            console.log(err)
+          })
       } else {
         api.addLike(id)
           .then((res) => {
             cardRender.setLikeCount(res.likes);
+          })
+          .catch((err) => {
+            console.log(err)
           })
       }
     }
@@ -127,45 +165,23 @@ const section = new Section({
 
 const formCard = new PopupWithForm('.popup_type_card-add',
   (data) => {
-    document.querySelector('.popup__btn_type_add-card').textContent = 'Сохранение...'
+    btnSubmitCards.textContent = 'Сохранение...'
     api.addCard(data['place'], data['image'])
       .then((res) => {
-        const card = createCard({
-          name: res.name,
-          link: res.link,
-          id: res._id,
-          likes: res.likes,
-          userId: userId,
-          ownerId: res.owner._id
-        })
-        section.addItemPrepend(card)
+        const card = createCard(res)
+        section.addItemPrepend(card);
+        formCard.close();
       })
       .finally(() => {
-        document.querySelector('.popup__btn_type_add-card').textContent = 'Создать'
-        formCard.close()
+        btnSubmitCards.textContent = 'Создать';
       })
-  }
-);
+      .catch((err) => {
+        console.log(err)
+      })
+  });
 formCard.setEventListeners();
 
-api.getInitialCards()
-  .then((res) => {
-    res.forEach(data => { // Перебираем поступившие с сервера карточки
-      const card = createCard({
-        name: data.name,
-        link: data.link,
-        likes: data.likes,
-        id: data._id,
-        userId: userId,
-        ownerId: data.owner._id
-      })
-      section.addItemAppend(card) // Вставляем на странице
-    });
-  })
-
-const confirm = new PopupWithForm('.popup_type_confirm', () => {
-  api.delCard()
-});
+const confirm = new PopupWithForm('.popup_type_confirm', () => {});
 confirm.setEventListeners();
 
 const openImagePopup = new PopupWithImage('.popup_type_picture');
@@ -186,8 +202,6 @@ btnAddCard.addEventListener('click', function () {
 })
 
 btnEditAvatar.addEventListener('click', function () {
-  const user = userInformation.getUserInfo();
-  inputAvatar.value = user.avatar;
   formAvatar.open();
   editAvatarValid.resetValidation();
 })

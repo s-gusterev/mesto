@@ -7,6 +7,7 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
+  // Проверяем ответ от сервера
   _checkResponse(res) {
     if (res.ok) { // Если все ок - получаем первоначальный ответ от сервера
       return res.json(); // Читаем ответ в формате json
@@ -18,20 +19,14 @@ class Api {
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
+      }).then(this._checkResponse)
   }
 
   // Получение карточек
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
+      }).then(this._checkResponse)
   }
 
   // Редактирование профиля
@@ -43,10 +38,7 @@ class Api {
           name,
           about
         })
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
+      }).then(this._checkResponse)
   }
 
   // Добавление карточки
@@ -58,11 +50,7 @@ class Api {
           name,
           link
         })
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
-
+      }).then(this._checkResponse)
   }
 
   // Удаление карточки
@@ -70,11 +58,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}`, {
         method: 'DELETE',
         headers: this._headers
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
-
+      }).then(this._checkResponse)
   }
 
   // Удаление лайка
@@ -82,10 +66,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: 'DELETE',
         headers: this._headers
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
+      }).then(this._checkResponse)
   }
 
   // Добавление лайка
@@ -93,10 +74,7 @@ class Api {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: 'PUT',
         headers: this._headers
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
+      }).then(this._checkResponse)
   }
 
   // Обновление аватара
@@ -107,10 +85,7 @@ class Api {
         body: JSON.stringify({
           avatar
         })
-      }).then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err)
-      })
+      }).then(this._checkResponse)
   }
 
 }

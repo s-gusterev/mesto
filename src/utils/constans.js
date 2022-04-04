@@ -7,6 +7,9 @@ export const formEditAvatar = document.querySelector('#form-edit-avatar');
 export const inputName = document.querySelector('#input-name');
 export const inputJob = document.querySelector('#input-about');
 export const inputAvatar = document.querySelector('#input-avatar');
+export const btnSubmitCards = document.querySelector('.popup__btn_type_add-card');
+export const btnSubmitAvatar = document.querySelector('.popup__btn_type_edit-avatar');
+export const btnSubmitProfile = document.querySelector('.popup__btn_type_profile');
 
 // Настройки для валидации формы
 export const validationConfig = {

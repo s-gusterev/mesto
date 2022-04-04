@@ -1,25 +1,22 @@
 export default class Popup {
   constructor(popupSelector) {
-    this._selector = document.querySelector(popupSelector);
+    this._popup = document.querySelector(popupSelector);
+    this._handleEscClose = this._handleEscClose.bind(this)
   }
 
   // Открываем
   open() {
-    this._selector.classList.add('popup_opened');
-    document.addEventListener('keydown', (event) => {
-      this._handleEscClose(event);
-    })
+    this._popup.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose)
   }
 
   // Закрываем
   close() {
-    this._selector.classList.remove('popup_opened');
-    document.removeEventListener('keydown', (event) => {
-      this._handleEscClose(event);
-    })
+    this._popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose)
   }
 
-//Закрываем по ESC
+  //Закрываем по ESC
   _handleEscClose(event) {
     if (event.key === 'Escape') {
       this.close()
@@ -29,7 +26,7 @@ export default class Popup {
 
   // Слушатели на закрытие
   setEventListeners() {
-    this._selector.addEventListener('mousedown', (event) => {
+    this._popup.addEventListener('mousedown', (event) => {
 
       if (event.target === event.currentTarget) {
         this.close();

@@ -8,11 +8,17 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
   }
 
-  addItemAppend(element) {
+  addItem(element) {
     this._container.append(element)
   }
 
   addItemPrepend(element) {
     this._container.prepend(element)
+  }
+
+  renderItems(items) {
+    items.forEach((element) => {
+      this._renderer(element, this._container)
+    });
   }
 }
