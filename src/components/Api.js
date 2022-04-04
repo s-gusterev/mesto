@@ -7,16 +7,18 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
+  _checkResponse(res) {
+    if (res.ok) { // Если все ок - получаем первоначальный ответ от сервера
+      return res.json(); // Читаем ответ в формате json
+    }
+    return Promise.reject(`Что-то пошло не так: ${res.status}`); // Если не ок возвращаем отклоненный промис с описанием ошибки
+  }
+
   // Получаем данные о пользователе
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
         headers: this._headers
-      }).then((res) => {
-        if (res.ok) { // Если все ок - получаем первоначальный ответ от сервера
-          return res.json(); // Читаем ответ в формате json
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`); // Если не ок возвращаем отклоненный промис с описанием ошибки
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
@@ -26,12 +28,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
@@ -46,12 +43,7 @@ class Api {
           name,
           about
         })
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
@@ -66,68 +58,48 @@ class Api {
           name,
           link
         })
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
 
   }
 
-// Удаление карточки
+  // Удаление карточки
   delCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
         method: 'DELETE',
         headers: this._headers
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
 
   }
 
-// Удаление лайка
+  // Удаление лайка
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: 'DELETE',
         headers: this._headers
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
   }
 
-// Добавление лайка
+  // Добавление лайка
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: 'PUT',
         headers: this._headers
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
   }
 
-// Обновление аватара
+  // Обновление аватара
   updateAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
@@ -135,12 +107,7 @@ class Api {
         body: JSON.stringify({
           avatar
         })
-      }).then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Что-то пошло не так: ${res.status}`);
-      })
+      }).then((res) => this._checkResponse(res))
       .catch((err) => {
         console.log(err)
       })
