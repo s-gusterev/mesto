@@ -6,20 +6,18 @@ export default class UserInfo {
   }) {
     this._title = document.querySelector(titleSelector);
     this._subtitle = document.querySelector(subtitleSelector);
-    //
     this.__avatar = document.querySelector(avatarSelector)
-
   }
+  
   getUserInfo() {
     this.user = {
       name: this._title.textContent,
       about: this._subtitle.textContent,
-      //
       avatar: this.__avatar.src
     };
     return this.user;
   }
-//
+
   setUserAvatar(user) {
     this.__avatar.src = user.avatar;
   }

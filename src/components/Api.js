@@ -22,6 +22,7 @@ class Api {
       })
   }
 
+  // Получение карточек
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
@@ -36,6 +37,7 @@ class Api {
       })
   }
 
+  // Редактирование профиля
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
         method: 'PATCH',
@@ -55,6 +57,7 @@ class Api {
       })
   }
 
+  // Добавление карточки
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
         method: 'POST',
@@ -75,6 +78,7 @@ class Api {
 
   }
 
+// Удаление карточки
   delCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
         method: 'DELETE',
@@ -91,6 +95,7 @@ class Api {
 
   }
 
+// Удаление лайка
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: 'DELETE',
@@ -106,6 +111,7 @@ class Api {
       })
   }
 
+// Добавление лайка
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
         method: 'PUT',
@@ -121,6 +127,7 @@ class Api {
       })
   }
 
+// Обновление аватара
   updateAvatar(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
         method: 'PATCH',
@@ -140,8 +147,6 @@ class Api {
   }
 
 }
-
-// другие методы работы с API
 
 export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-39',

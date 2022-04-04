@@ -12,21 +12,23 @@ export default class Card {
     this._handleLikeClick = handleLikeClick;
   }
 
-
+  // Проверка стоит-ли лайк
   isLiked() {
     const userHasLiked = this._likes.find(user => user._id === this._userId);
     return userHasLiked;
   }
 
-  //Функция лайка карточки
+  //Добавляем лайк
   _addCardLike() {
     this._cardLike.classList.add('card__like_active');
   };
 
+  // Удаляем лайк
   _removeCardLike() {
     this._cardLike.classList.remove('card__like_active');
   }
 
+  // Показываем количество лайков
   setLikeCount(like) {
     this._likes = like;
     this._cardLikeCount.textContent = this._likes.length;
@@ -38,7 +40,7 @@ export default class Card {
     }
   }
 
-  //Функция удаления карточки
+  // Удаляем карточку
   deleteCard = () => {
     this._cardBody.remove();
     this._cardBody = null;
@@ -47,9 +49,7 @@ export default class Card {
 
   //Слушатели
   _setEventListeners() {
-    // this._cardLike.addEventListener('click', this._addCardLike);
     this._cardLike.addEventListener('click', () => this._handleLikeClick(this._id));
-
     this._cardDel.addEventListener('click', () => this._handleDelClick(this._id));
     this._cardImg.addEventListener('click', this._handleCardClick);
   }
@@ -73,6 +73,7 @@ export default class Card {
     if (this._ownerId !== this._userId) {
       this._cardDel.style.display = 'none';
     }
+
     return this._cardBody;
   }
 }
